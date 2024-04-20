@@ -1,2 +1,4 @@
 *.vec
 *.txt
+*.pt
+*.pyc
