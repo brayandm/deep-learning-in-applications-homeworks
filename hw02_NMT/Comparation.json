@@ -2,7 +2,7 @@
     "rnn": {
         "translation quality": 0,
         "complexity": 0,
-        "training time": 0,
+        "training time": "20min",
         "evaluation time": 0
     },
     "attention": {
