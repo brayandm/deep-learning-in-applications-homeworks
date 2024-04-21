@@ -3,7 +3,7 @@
         "translation quality": 15,
         "complexity": 0,
         "training time": "20min",
-        "evaluation time": 0
+        "evaluation time": "3sec"
     },
     "attention": {
         "translation quality": 0,
