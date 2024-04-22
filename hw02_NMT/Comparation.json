@@ -1,6 +1,6 @@
 {
     "rnn": {
-        "translation quality": 15,
+        "translation quality": 17,
         "complexity": 0,
         "training time": "18min",
         "evaluation time": "3sec"
