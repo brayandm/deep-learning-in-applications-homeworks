@@ -18,7 +18,7 @@
         "evaluation time": 0
     },
     "bart": {
-        "translation quality": 0,
+        "translation quality": 52,
         "complexity": 0,
         "training time": "45min",
         "evaluation time": "4min"
