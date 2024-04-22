@@ -20,7 +20,7 @@
     "bart": {
         "translation quality": 0,
         "complexity": 0,
-        "training time": 0,
+        "training time": "3hours",
         "evaluation time": 0
     }
 }
