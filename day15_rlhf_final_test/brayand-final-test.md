@@ -58,6 +58,31 @@ This function gives insight into which actions are better in a particular state 
 
 ### 4. Q-learning, approximate Q-learning. DQN, bells and whistles (Experience replay, Double DQN, autocorrelation problem)
 
+#### Q-learning
+
+Q-learning is a model-free reinforcement learning algorithm that seeks to learn the optimal action-value function, $Q^\*(s, a) $, which provides the best action in every state. The core idea is to estimate the Q-values based on the Bellman equation iteratively. The Q-values are updated as follows:
+
+$ Q(s, a) \leftarrow Q(s, a) + \alpha \left[r + \gamma \max_{a'} Q(s', a') - Q(s, a)\right] $
+where $ s $ is the current state, $ a $ is the action taken, $ r $ is the reward received, $ s' $ is the new state, $ \alpha $ is the learning rate, and $ \gamma $ is the discount factor. The term $ \max\_{a'} Q(s', a') $ represents the highest Q-value achievable from the next state $ s' $, providing a lookahead that guides the updates.
+
+#### Approximate Q-learning
+
+As the state or action spaces become very large, storing and updating a Q-value for every state-action pair becomes computationally infeasible. Approximate Q-learning addresses this by using function approximation to estimate the Q-values. Instead of maintaining a table, a parameterized function, typically a linear function or a neural network, is used to approximate $ Q(s, a; \theta) $, where $ \theta $ are the parameters of the function. The parameters are adjusted to minimize the difference between the estimated Q-values and the target Q-values obtained from the Bellman equation.
+
+#### Deep Q-Network (DQN)
+
+Deep Q-Networks (DQN) extend approximate Q-learning by using deep neural networks to approximate the Q-function. Introduced by researchers at DeepMind, DQN was a breakthrough because it demonstrated that a neural network could effectively learn to play Atari games at a superhuman level directly from pixel inputs. DQNs stabilize the training of deep neural networks with two key innovations:
+
+-   **Experience Replay:** This technique stores the agent's experiences at each time step, $ (s, a, r, s') $, in a data set called a replay buffer. Random mini-batches from this buffer are used to update the network, which helps in breaking the correlation between consecutive samples, thus stabilizing the learning process.
+
+-   **Fixed Q-targets:** DQN uses a separate, fixed network to generate the target Q-values in the update equation. The weights of this target network are updated less frequently (every few thousand steps) than the primary network weights. This approach reduces the correlations with the target, further stabilizing learning.
+
+#### Enhancements to DQN
+
+-   **Double DQN:** In standard DQN, the same values are used both to select and to evaluate an action, which can lead to overoptimistic value estimates. Double DQN addresses this by decoupling the selection from the evaluation. Two networks are used: one to select the best action and another to evaluate the action. This reduces overestimations and leads to more stable and reliable learning.
+
+-   **Addressing Autocorrelation Problem:** The autocorrelation problem in RL refers to the issue where consecutive states are often highly correlated, leading to biased samples and inefficient learning. Techniques like experience replay help mitigate this problem by mixing more distant experiences in each batch, thus reducing the immediate correlations.
+
 ### 5. Policy gradient and REINFORCE algorithm
 
 -   a. Baseline idea
