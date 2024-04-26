@@ -12,6 +12,6 @@
 
 ### 5. Policy gradient and REINFORCE algorithm
 
--   a. Baseline idea, A2C
+-   a. Baseline idea
 
 ### 6. Policy gradient applications in other domains (outside RL). How Self-Critical Sequence Training is performed? What is used as a baseline?
