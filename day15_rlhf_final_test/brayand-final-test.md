@@ -87,4 +87,42 @@ Deep Q-Networks (DQN) extend approximate Q-learning by using deep neural network
 
 -   a. Baseline idea
 
+### Policy Gradient
+
+Policy gradient methods are a class of algorithms in reinforcement learning that optimize the policy directly. A "policy" in RL is a strategy used by the agent to decide which action to take given a state. In policy gradient methods, the objective is to adjust the policy parameters $\theta$ in a way that maximizes the expected return, which is the cumulative reward the agent receives over time.
+
+The core idea is that you can use gradient ascent to find the best parameters that increase the expected return. The policy is often modeled as a probability distribution $\pi(a|s, \theta)$ that defines the likelihood of taking action $a$ in state $s$ with parameters $\theta$. The gradient of the expected return with respect to the policy parameters $\theta$ guides how the parameters should be adjusted. The update rule typically looks like this:
+
+$
+\theta*{\text{new}} = \theta*{\text{old}} + \alpha \nabla\_\theta J(\theta)
+$
+
+where $\alpha$ is the learning rate and $\nabla\_\theta J(\theta)$ is the gradient of the performance measure $J(\theta)$ with respect to $\theta$.
+
+### REINFORCE Algorithm
+
+REINFORCE, introduced by Ronald Williams in 1992, is a specific type of policy gradient method. It is also known as Monte Carlo Policy Gradient, as it relies on complete episodes for training, using their returns for the policy gradient estimate. The algorithm works as follows:
+
+1. **Generate an episode:** Using the current policy $\pi\_\theta$, run the agent through an episode and record all states, actions, and rewards.
+2. **Calculate returns:** For each time step $t$ in the episode, calculate the total discounted return $G_t$ from that time step onward.
+3. **Policy update:** Use the returns as an unbiased sample of the policy gradient. The policy parameters are updated by:
+
+    $
+    \theta = \theta + \alpha \sum*{t=0}^{T-1} \nabla*\theta \log \pi\_\theta(a_t|s_t) G_t
+    $
+
+    Here, $ \nabla*\theta \log \pi*\theta(a_t|s_t) $ is the gradient of the log-probability of the action taken, and $G_t$ is the return from time step $t$.
+
+### Baseline Idea
+
+A major enhancement in policy gradient methods, including REINFORCE, is the use of a "baseline." A baseline is typically a function that estimates the expected reward from a given state. By subtracting this baseline from the return, the variance of the gradient estimate can be reduced, leading to more stable and efficient learning. The baseline does not bias the gradient estimates if chosen appropriately.
+
+One common choice for the baseline is a state-value function $V(s)$, which estimates how good it is to be in a particular state. The REINFORCE update rule with a baseline $b(s_t)$ looks like this:
+
+$
+\theta = \theta + \alpha \sum*{t=0}^{T-1} \nabla*\theta \log \pi\_\theta(a_t|s_t) (G_t - b(s_t))
+$
+
+This modification helps in reducing the variance of the update step, making learning smoother and often faster.
+
 ### 6. Policy gradient applications in other domains (outside RL). How Self-Critical Sequence Training is performed? What is used as a baseline?
