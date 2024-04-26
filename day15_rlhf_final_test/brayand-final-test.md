@@ -87,7 +87,7 @@ Deep Q-Networks (DQN) extend approximate Q-learning by using deep neural network
 
 -   a. Baseline idea
 
-### Policy Gradient
+#### Policy Gradient
 
 Policy gradient methods are a class of algorithms in reinforcement learning that optimize the policy directly. A "policy" in RL is a strategy used by the agent to decide which action to take given a state. In policy gradient methods, the objective is to adjust the policy parameters$\theta$in a way that maximizes the expected return, which is the cumulative reward the agent receives over time.
 
@@ -97,7 +97,7 @@ $\theta*{\text{new}} = \theta*{\text{old}} + \alpha \nabla\_\theta J(\theta)$
 
 where$\alpha$is the learning rate and$\nabla\_\theta J(\theta)$is the gradient of the performance measure$J(\theta)$with respect to$\theta$.
 
-### REINFORCE Algorithm
+#### REINFORCE Algorithm
 
 REINFORCE is a specific type of policy gradient method. It is also known as Monte Carlo Policy Gradient, as it relies on complete episodes for training, using their returns for the policy gradient estimate. The algorithm works as follows:
 
@@ -109,7 +109,7 @@ REINFORCE is a specific type of policy gradient method. It is also known as Mont
 
     Here,$\nabla*\theta \log \pi*\theta(a_t|s_t)$is the gradient of the log-probability of the action taken, and$G_t$is the return from time step$t$.
 
-### Baseline Idea
+#### Baseline Idea
 
 A major enhancement in policy gradient methods, including REINFORCE, is the use of a "baseline." A baseline is typically a function that estimates the expected reward from a given state. By subtracting this baseline from the return, the variance of the gradient estimate can be reduced, leading to more stable and efficient learning. The baseline does not bias the gradient estimates if chosen appropriately.
 
@@ -121,7 +121,7 @@ This modification helps in reducing the variance of the update step, making lear
 
 ### 6. Policy gradient applications in other domains (outside RL). How Self-Critical Sequence Training is performed? What is used as a baseline?
 
-### Policy Gradient Applications Beyond RL
+#### Policy Gradient Applications Beyond RL
 
 Policy gradient methods are used in domains requiring sequential decision-making or discrete outcome optimization, such as:
 
@@ -129,7 +129,7 @@ Policy gradient methods are used in domains requiring sequential decision-making
 2. **Robotics:** In imitation learning, where the aim is to mimic expert behavior rather than maximizing a reward.
 3. **Optimization:** In solving complex combinatorial problems by framing them as a series of decision steps.
 
-### Self-Critical Sequence Training (SCST)
+#### Self-Critical Sequence Training (SCST)
 
 SCST is a method applied in image captioning, adapting policy gradient techniques to maximize a reward function related to caption quality.
 
@@ -139,6 +139,6 @@ SCST is a method applied in image captioning, adapting policy gradient technique
 2. **Compute Reward:** Use metrics like BLEU or CIDEr to evaluate both sets of captions against reference captions.
 3. **Update Parameters:** Use the difference in reward between sampled and greedy captions as an advantage to update the model. This encourages the model to generate captions better than or equal to the greedy captions.
 
-### Baseline in SCST
+#### Baseline in SCST
 
 The baseline in SCST is the reward of the greedy captions. This baseline helps stabilize training by normalizing rewards of the sampled captions, pushing the model to generate better outputs.
