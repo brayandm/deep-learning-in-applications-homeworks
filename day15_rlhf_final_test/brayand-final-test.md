@@ -101,7 +101,7 @@ where $\alpha$ is the learning rate and $\nabla\_\theta J(\theta)$ is the gradie
 
 ### REINFORCE Algorithm
 
-REINFORCE, introduced by Ronald Williams in 1992, is a specific type of policy gradient method. It is also known as Monte Carlo Policy Gradient, as it relies on complete episodes for training, using their returns for the policy gradient estimate. The algorithm works as follows:
+REINFORCE is a specific type of policy gradient method. It is also known as Monte Carlo Policy Gradient, as it relies on complete episodes for training, using their returns for the policy gradient estimate. The algorithm works as follows:
 
 1. **Generate an episode:** Using the current policy $\pi\_\theta$, run the agent through an episode and record all states, actions, and rewards.
 2. **Calculate returns:** For each time step $t$ in the episode, calculate the total discounted return $G_t$ from that time step onward.
