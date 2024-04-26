@@ -42,38 +42,38 @@ Repeat the process of sampling, evaluation, selection, and updating for a set nu
 
 #### Value Function
 
-The value function, often denoted as $ V(s) $, measures the expected cumulative reward an agent can achieve starting from a specific state $ s $ and following a particular policy $ \pi $. The policy $ \pi $ is a strategy that the agent employs, which dictates the actions to take in different states. The value function thus answers the question, "What is the long-term reward that the agent can expect by being in a certain state and following a specific policy?"
+The value function, often denoted as$V(s)$, measures the expected cumulative reward an agent can achieve starting from a specific state$s$and following a particular policy$\pi$. The policy$\pi$is a strategy that the agent employs, which dictates the actions to take in different states. The value function thus answers the question, "What is the long-term reward that the agent can expect by being in a certain state and following a specific policy?"
 
 Mathematically, it's defined as:
-$ V^\pi(s) = \mathbb{E}[R_t | s_t = s, \pi] $
-where $ R_t $ is the total reward starting from time $ t $, conditioned on the state being $ s $ and following policy $ \pi $. The expectation $ \mathbb{E} $ accounts for the probabilistic nature of the state transitions and the rewards.
+$V^\pi(s) = \mathbb{E}[R_t | s_t = s, \pi]$
+where$R_t$is the total reward starting from time$t$, conditioned on the state being$s$and following policy$\pi$. The expectation$\mathbb{E}$accounts for the probabilistic nature of the state transitions and the rewards.
 
 #### Q-Function (Action-Value Function)
 
-The Q-function, or action-value function, extends the value function by incorporating actions. Denoted as $ Q(s, a) $, it measures the expected cumulative reward starting from state $ s $, taking an action $ a $, and thereafter following policy $ \pi $. It effectively evaluates the usefulness of taking a particular action in a given state.
+The Q-function, or action-value function, extends the value function by incorporating actions. Denoted as$Q(s, a)$, it measures the expected cumulative reward starting from state$s$, taking an action$a$, and thereafter following policy$\pi$. It effectively evaluates the usefulness of taking a particular action in a given state.
 
 The Q-function is formally defined as:
-$ Q^\pi(s, a) = \mathbb{E}[R_t | s_t = s, a_t = a, \pi] $
+$Q^\pi(s, a) = \mathbb{E}[R_t | s_t = s, a_t = a, \pi]$
 This function gives insight into which actions are better in a particular state by providing a value associated with each action, thus guiding the decision-making process.
 
 ### 4. Q-learning, approximate Q-learning. DQN, bells and whistles (Experience replay, Double DQN, autocorrelation problem)
 
 #### Q-learning
 
-Q-learning is a model-free reinforcement learning algorithm that seeks to learn the optimal action-value function, $Q^\*(s, a) $, which provides the best action in every state. The core idea is to estimate the Q-values based on the Bellman equation iteratively. The Q-values are updated as follows:
+Q-learning is a model-free reinforcement learning algorithm that seeks to learn the optimal action-value function,$Q^\*(s, a)$, which provides the best action in every state. The core idea is to estimate the Q-values based on the Bellman equation iteratively. The Q-values are updated as follows:
 
-$ Q(s, a) \leftarrow Q(s, a) + \alpha \left[r + \gamma \max_{a'} Q(s', a') - Q(s, a)\right] $
-where $ s $ is the current state, $ a $ is the action taken, $ r $ is the reward received, $ s' $ is the new state, $ \alpha $ is the learning rate, and $ \gamma $ is the discount factor. The term $ \max\_{a'} Q(s', a') $ represents the highest Q-value achievable from the next state $ s' $, providing a lookahead that guides the updates.
+$Q(s, a) \leftarrow Q(s, a) + \alpha \left[r + \gamma \max_{a'} Q(s', a') - Q(s, a)\right]$
+where$s$is the current state,$a$is the action taken,$r$is the reward received,$s'$is the new state,$\alpha$is the learning rate, and$\gamma$is the discount factor. The term$\max\_{a'} Q(s', a')$represents the highest Q-value achievable from the next state$s'$, providing a lookahead that guides the updates.
 
 #### Approximate Q-learning
 
-As the state or action spaces become very large, storing and updating a Q-value for every state-action pair becomes computationally infeasible. Approximate Q-learning addresses this by using function approximation to estimate the Q-values. Instead of maintaining a table, a parameterized function, typically a linear function or a neural network, is used to approximate $ Q(s, a; \theta) $, where $ \theta $ are the parameters of the function. The parameters are adjusted to minimize the difference between the estimated Q-values and the target Q-values obtained from the Bellman equation.
+As the state or action spaces become very large, storing and updating a Q-value for every state-action pair becomes computationally infeasible. Approximate Q-learning addresses this by using function approximation to estimate the Q-values. Instead of maintaining a table, a parameterized function, typically a linear function or a neural network, is used to approximate$Q(s, a; \theta)$, where$\theta$are the parameters of the function. The parameters are adjusted to minimize the difference between the estimated Q-values and the target Q-values obtained from the Bellman equation.
 
 #### Deep Q-Network (DQN)
 
 Deep Q-Networks (DQN) extend approximate Q-learning by using deep neural networks to approximate the Q-function. Introduced by researchers at DeepMind, DQN was a breakthrough because it demonstrated that a neural network could effectively learn to play Atari games at a superhuman level directly from pixel inputs. DQNs stabilize the training of deep neural networks with two key innovations:
 
--   **Experience Replay:** This technique stores the agent's experiences at each time step, $ (s, a, r, s') $, in a data set called a replay buffer. Random mini-batches from this buffer are used to update the network, which helps in breaking the correlation between consecutive samples, thus stabilizing the learning process.
+-   **Experience Replay:** This technique stores the agent's experiences at each time step,$(s, a, r, s')$, in a data set called a replay buffer. Random mini-batches from this buffer are used to update the network, which helps in breaking the correlation between consecutive samples, thus stabilizing the learning process.
 
 -   **Fixed Q-targets:** DQN uses a separate, fixed network to generate the target Q-values in the update equation. The weights of this target network are updated less frequently (every few thousand steps) than the primary network weights. This approach reduces the correlations with the target, further stabilizing learning.
 
@@ -89,39 +89,33 @@ Deep Q-Networks (DQN) extend approximate Q-learning by using deep neural network
 
 ### Policy Gradient
 
-Policy gradient methods are a class of algorithms in reinforcement learning that optimize the policy directly. A "policy" in RL is a strategy used by the agent to decide which action to take given a state. In policy gradient methods, the objective is to adjust the policy parameters $\theta$ in a way that maximizes the expected return, which is the cumulative reward the agent receives over time.
+Policy gradient methods are a class of algorithms in reinforcement learning that optimize the policy directly. A "policy" in RL is a strategy used by the agent to decide which action to take given a state. In policy gradient methods, the objective is to adjust the policy parameters$\theta$in a way that maximizes the expected return, which is the cumulative reward the agent receives over time.
 
-The core idea is that you can use gradient ascent to find the best parameters that increase the expected return. The policy is often modeled as a probability distribution $\pi(a|s, \theta)$ that defines the likelihood of taking action $a$ in state $s$ with parameters $\theta$. The gradient of the expected return with respect to the policy parameters $\theta$ guides how the parameters should be adjusted. The update rule typically looks like this:
+The core idea is that you can use gradient ascent to find the best parameters that increase the expected return. The policy is often modeled as a probability distribution$\pi(a|s, \theta)$that defines the likelihood of taking action$a$in state$s$with parameters$\theta$. The gradient of the expected return with respect to the policy parameters$\theta$guides how the parameters should be adjusted. The update rule typically looks like this:
 
-$
-\theta*{\text{new}} = \theta*{\text{old}} + \alpha \nabla\_\theta J(\theta)
-$
+$\theta*{\text{new}} = \theta*{\text{old}} + \alpha \nabla\_\theta J(\theta)$
 
-where $\alpha$ is the learning rate and $\nabla\_\theta J(\theta)$ is the gradient of the performance measure $J(\theta)$ with respect to $\theta$.
+where$\alpha$is the learning rate and$\nabla\_\theta J(\theta)$is the gradient of the performance measure$J(\theta)$with respect to$\theta$.
 
 ### REINFORCE Algorithm
 
 REINFORCE is a specific type of policy gradient method. It is also known as Monte Carlo Policy Gradient, as it relies on complete episodes for training, using their returns for the policy gradient estimate. The algorithm works as follows:
 
-1. **Generate an episode:** Using the current policy $\pi\_\theta$, run the agent through an episode and record all states, actions, and rewards.
-2. **Calculate returns:** For each time step $t$ in the episode, calculate the total discounted return $G_t$ from that time step onward.
+1. **Generate an episode:** Using the current policy$\pi\_\theta$, run the agent through an episode and record all states, actions, and rewards.
+2. **Calculate returns:** For each time step$t$in the episode, calculate the total discounted return$G_t$from that time step onward.
 3. **Policy update:** Use the returns as an unbiased sample of the policy gradient. The policy parameters are updated by:
 
-    $
-    \theta = \theta + \alpha \sum*{t=0}^{T-1} \nabla*\theta \log \pi\_\theta(a_t|s_t) G_t
-    $
+    $\theta = \theta + \alpha \sum*{t=0}^{T-1} \nabla*\theta \log \pi\_\theta(a_t|s_t) G_t$
 
-    Here, $ \nabla*\theta \log \pi*\theta(a_t|s_t) $ is the gradient of the log-probability of the action taken, and $G_t$ is the return from time step $t$.
+    Here,$\nabla*\theta \log \pi*\theta(a_t|s_t)$is the gradient of the log-probability of the action taken, and$G_t$is the return from time step$t$.
 
 ### Baseline Idea
 
 A major enhancement in policy gradient methods, including REINFORCE, is the use of a "baseline." A baseline is typically a function that estimates the expected reward from a given state. By subtracting this baseline from the return, the variance of the gradient estimate can be reduced, leading to more stable and efficient learning. The baseline does not bias the gradient estimates if chosen appropriately.
 
-One common choice for the baseline is a state-value function $V(s)$, which estimates how good it is to be in a particular state. The REINFORCE update rule with a baseline $b(s_t)$ looks like this:
+One common choice for the baseline is a state-value function$V(s)$, which estimates how good it is to be in a particular state. The REINFORCE update rule with a baseline$b(s_t)$looks like this:
 
-$
-\theta = \theta + \alpha \sum*{t=0}^{T-1} \nabla*\theta \log \pi\_\theta(a_t|s_t) (G_t - b(s_t))
-$
+$\theta = \theta + \alpha \sum*{t=0}^{T-1} \nabla*\theta \log \pi\_\theta(a_t|s_t) (G_t - b(s_t))$
 
 This modification helps in reducing the variance of the update step, making learning smoother and often faster.
 
