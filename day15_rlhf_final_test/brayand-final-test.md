@@ -89,7 +89,7 @@ Deep Q-Networks (DQN) extend approximate Q-learning by using deep neural network
 
 #### Policy Gradient
 
-Policy gradient methods are a class of algorithms in reinforcement learning that optimize the policy directly. A "policy" in RL is a strategy used by the agent to decide which action to take given a state. In policy gradient methods, the objective is to adjust the policy parameters$\theta$in a way that maximizes the expected return, which is the cumulative reward the agent receives over time.
+Policy gradient methods are a class of algorithms in reinforcement learning that optimize the policy directly. A "policy" in RL is a strategy used by the agent to decide which action to take given a state. In policy gradient methods, the objective is to adjust the policy parameters $\theta$ in a way that maximizes the expected return, which is the cumulative reward the agent receives over time.
 
 The core idea is that you can use gradient ascent to find the best parameters that increase the expected return. The policy is often modeled as a probability distribution $\pi(a|s, \theta)$ that defines the likelihood of taking action $a$ in state $s$ with parameters $\theta$. The gradient of the expected return with respect to the policy parameters $\theta$ guides how the parameters should be adjusted. The update rule typically looks like this:
 
