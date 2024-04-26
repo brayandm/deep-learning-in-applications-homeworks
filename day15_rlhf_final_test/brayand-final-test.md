@@ -126,3 +126,25 @@ $
 This modification helps in reducing the variance of the update step, making learning smoother and often faster.
 
 ### 6. Policy gradient applications in other domains (outside RL). How Self-Critical Sequence Training is performed? What is used as a baseline?
+
+### Policy Gradient Applications Beyond RL
+
+Policy gradient methods are used in domains requiring sequential decision-making or discrete outcome optimization, such as:
+
+1. **Natural Language Processing (NLP):** For tasks like machine translation or dialogue generation, where sequences of words are generated similarly to actions in RL.
+2. **Robotics:** In imitation learning, where the aim is to mimic expert behavior rather than maximizing a reward.
+3. **Optimization:** In solving complex combinatorial problems by framing them as a series of decision steps.
+
+### Self-Critical Sequence Training (SCST)
+
+SCST is a method applied in image captioning, adapting policy gradient techniques to maximize a reward function related to caption quality.
+
+**Steps in SCST:**
+
+1. **Generate Captions:** Produce captions by sampling from the model and by greedy selection.
+2. **Compute Reward:** Use metrics like BLEU or CIDEr to evaluate both sets of captions against reference captions.
+3. **Update Parameters:** Use the difference in reward between sampled and greedy captions as an advantage to update the model. This encourages the model to generate captions better than or equal to the greedy captions.
+
+### Baseline in SCST
+
+The baseline in SCST is the reward of the greedy captions. This baseline helps stabilize training by normalizing rewards of the sampled captions, pushing the model to generate better outputs.
